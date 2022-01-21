@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
     const action = ['-', '+', '×', '÷', '%', '+/-'];
 
+    const calc = document.querySelector('.calc') // весь калькулятор, чтобы отменить дефолтное взаимодействие
     const out = document.querySelector('.calc-screen p'); // число ввода
     const ac = document.querySelector('.ac'); // кнопка очистки
     const buttons = document.querySelector('.buttons'); // блок кнопок
     const operationButtons = document.querySelectorAll('.division, .multiply, .minus, .plus')
+
+ calc.addEventListener('contextmenu', (e) => e.preventDefault())
+ calc.addEventListener('mousedown', (e) => e.preventDefault())
 
     const unpressedButtonOperation = () => {
         operationButtons.forEach(btn => {
