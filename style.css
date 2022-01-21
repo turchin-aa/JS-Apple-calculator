@@ -30,6 +30,7 @@ button.btn {
     user-select: none;
     border: none;
     color: #fff;
+    transition: all 0.7s ease-out;
 }
 
 button.btn.zero {
@@ -46,7 +47,7 @@ button.btn:hover {
 }
 
 button.btn:active {
-    filter: brightness(90%)
+    filter: brightness(90%);
 }
 
 .btn.bg-grey {
@@ -90,7 +91,7 @@ div.calc-screen p {
     margin: 0;
 }
 
-.unzoom{
+.unzoom {
     text-align: right;
     font-size: 4rem;
     margin: 0;

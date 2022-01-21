@@ -71,10 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
             //если нажата цифра 0-9 или точка
             if (digit.includes(key)) {
                 if (b === '' && sign === '') {
-                   if (a.length < 9){
-                    a += key;
-                   }
-                    if (a.length > 6){
+                    if (a.length < 9) {
+                        if (key === '.' && a.includes('.')) {
+                            a += '';
+                        } else {
+                            a += key;
+                            out.textContent = a;
+                        }
+                    }
+                    if (a.length > 6) {
                         out.classList.remove('unzoom')
                         out.classList.add('zoom')
                     }
@@ -86,10 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     out.textContent = b;
                 } else {
                     unpressedButtonOperation()
-                    if (b.length < 9){
-                    b += key;
+                    if (b.length < 9) {
+                        if (key === '.' && b.includes('.')) {
+                            b += '';
+                        } else {
+                            b += key;
+                            out.textContent = b;
+                        }
                     }
-                    if (b.length > 6){
+                    if (b.length > 6) {
                         out.classList.remove('unzoom')
                         out.classList.add('zoom')
                     }
