@@ -87,9 +87,19 @@ div.calc-screen {
 }
 
 div.calc-screen p {
+    margin: 0;
+}
+
+.unzoom{
     text-align: right;
     font-size: 4rem;
     margin: 0;
     font-weight: 200;
-    width: 13rem;
+}
+
+.zoom {
+    text-align: right;
+    font-size: 3rem;
+    margin: 0;
+    font-weight: 200;
 }

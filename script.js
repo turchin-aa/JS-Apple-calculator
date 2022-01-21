@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     pressedButtonOperation()
 
     const clearAll = () => {
+        out.classList.remove('zoom')
+        out.classList.add('unzoom')
         a = '';
         b = '';
         sign = ''; //функция очистки поля
@@ -69,7 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
             //если нажата цифра 0-9 или точка
             if (digit.includes(key)) {
                 if (b === '' && sign === '') {
+                   if (a.length < 9){
                     a += key;
+                   }
+                    if (a.length > 6){
+                        out.classList.remove('unzoom')
+                        out.classList.add('zoom')
+                    }
                     out.textContent = a;
                 } else if (a !== '' && b !== '' && finish) { //если нажали равно
                     unpressedButtonOperation()
@@ -78,7 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     out.textContent = b;
                 } else {
                     unpressedButtonOperation()
+                    if (b.length < 9){
                     b += key;
+                    }
+                    if (b.length > 6){
+                        out.classList.remove('unzoom')
+                        out.classList.add('zoom')
+                    }
                     out.textContent = b; // ввод нового числа после расчетов
                 }
                 return;
@@ -153,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                 }
                 finish = true;
+                a = parseFloat(a.toFixed(7))
                 out.textContent = a;
             }
         }
