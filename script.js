@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let finish = false;
 
     const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
-    const action = ['-', '+', '×', '÷', '%', '+/-'];
+    const action = ['-', '+', '×', '÷'];
 
     const calc = document.querySelector('.calc') // весь калькулятор, чтобы отменить дефолтное взаимодействие
     const out = document.querySelector('.calc-screen p'); // число ввода
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelector('.buttons'); // блок кнопок
     const operationButtons = document.querySelectorAll('.division, .multiply, .minus, .plus')
 
- calc.addEventListener('contextmenu', (e) => e.preventDefault())
- calc.addEventListener('mousedown', (e) => e.preventDefault())
+    calc.addEventListener('contextmenu', (e) => e.preventDefault())
+    calc.addEventListener('mousedown', (e) => e.preventDefault())
 
     const unpressedButtonOperation = () => {
         operationButtons.forEach(btn => {
@@ -36,13 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
     pressedButtonOperation()
-
-    const percent = (number, numberOfPercent) => { //функция подсчета процента
-        if (numberOfPercent === number) {
-            return number / 100
-        }
-        return (number / 100) * numberOfPercent
-    }
 
     const clearAll = () => {
         a = '';
@@ -89,12 +82,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     out.textContent = b; // ввод нового числа после расчетов
                 }
                 return;
+
+            } else if (key === '+/-' && a !== '' && b === '') {
+                a = -a
+                out.textContent = a
+            } else if (key === '+/-' && a !== '' && b !== '') {
+                b = -b
+                out.textContent = b
+            } else if (key === '%' && a !== '' && b === '') {
+                a = a / 100
+                out.textContent = a
+            } else if (key === '%' && a !== '' && b !== '') {
+                b = b / 100
+                out.textContent = b
             }
 
             if (action.includes(key)) {
                 sign = key;
                 out.textContent = a;
                 return;
+            } else if (sign !== '' && a !== '' && b !== '' && key === '%') {
+                a = (a / 100) * b * 100;
+                out.textContent = a
             }
             if (key === '=') {
                 if (b === '') {
@@ -119,12 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             return
                         }
                         a = (+a) / (+b)
-                        break;
-                    case '+/-':
-                        a = -(+a)
-                        break;
-                    case '%':
-                        a = percent(a, b)
                         break;
                 }
                 finish = true;
