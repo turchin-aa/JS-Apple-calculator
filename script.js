@@ -114,8 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 b = -b
                 out.textContent = b
             } else if (key === '%' && a !== '' && b === '') {
-                a = a / 100
-                out.textContent = a
+                a = a / 100;
+                a = parseFloat(a.toFixed(7))
+                out.textContent = a;
             } else if (action.includes(key) && a !== '' && b !== '' && sign !== '' && !finish) {
                 switch (sign) {
                     case '+':
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             } else if (sign !== '' && a !== '' && b !== '' && key === '%') {
                 a = (a / 100) * b;
+                a = parseFloat(a.toFixed(7))
                 out.textContent = a
             }
             if (key === '=') {
