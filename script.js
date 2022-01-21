@@ -92,17 +92,39 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (key === '%' && a !== '' && b === '') {
                 a = a / 100
                 out.textContent = a
-            } else if (key === '%' && a !== '' && b !== '') {
-                b = b / 100
-                out.textContent = b
+            } else if (action.includes(key) && a !== '' && b !== '' && sign !== '' && !finish) {
+                switch (sign) {
+                    case '+':
+                        a = (+a) + (+b)
+                        break;
+                    case '-':
+                        a = (+a) - (+b)
+                        break;
+                    case '×':
+                        a = (+a) * (+b)
+                        break;
+                    case '÷':
+                        if (b === '0') {
+                            out.textContent = 'Ошибка'
+                            a = '';
+                            b = '';
+                            sign = '';
+                            return
+                        }
+                        a = (+a) / (+b)
+                        break;
+                }
+                finish = true;
+                out.textContent = a;
             }
+
 
             if (action.includes(key)) {
                 sign = key;
                 out.textContent = a;
                 return;
             } else if (sign !== '' && a !== '' && b !== '' && key === '%') {
-                a = (a / 100) * b * 100;
+                a = (a / 100) * b;
                 out.textContent = a
             }
             if (key === '=') {
